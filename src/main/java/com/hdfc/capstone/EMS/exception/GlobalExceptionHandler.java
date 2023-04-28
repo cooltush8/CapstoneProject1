@@ -11,5 +11,10 @@ public class GlobalExceptionHandler {
 	  public ResponseEntity<String> handleEmployeeIDException(EmployeeIDException ex) {
 	    return new ResponseEntity<String>("Invalid Employee ID", HttpStatus.BAD_REQUEST);
 	  }
+	
+	@ExceptionHandler(EmployeeIDException.class)
+	public ResponseEntity<String> exceptionHandler(EmployeeIDException exp){
+		return new ResponseEntity<String>(exp.getMessage().toString(),HttpStatus.EXPECTATION_FAILED);
+	}
 
 }
