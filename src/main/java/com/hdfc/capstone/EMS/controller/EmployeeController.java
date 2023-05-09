@@ -24,14 +24,22 @@ public class EmployeeController {
 	private IEmployeeService service;
 
 	@GetMapping("/{employeeID}")
-	public ResponseEntity<Object> getByEmployeeId(@PathVariable int employeeID) throws Exception  {
+	public EmployeeVO getByEmployeeId(@PathVariable int employeeID) throws Exception  {
 		logger.info("Record of EmployeeID("+employeeID+")is called");
-		EmployeeVO employeeVO = service.getByEmployeeId(employeeID);
-		if (employeeVO == null) {
-			String errorMessage = "Invalid employee ID: " + employeeID;
-			logger.error(errorMessage);
-			throw new EmployeeIDException(errorMessage);
-		}
-		return new ResponseEntity<>(employeeVO, HttpStatus.OK);
+		
+		return service.getByEmployeeId(employeeID);
 	}
 }
+	
+//	
+//	 @GetMapping("/employees/{id}")
+//	    public ResponseEntity<Employee> getByEmployeeId(@PathVariable Long id) {
+//	        Optional<Employee> employee = EmployeeService.getByEmployeeId(id);
+//
+//	        if (employee.isPresent()) {
+//	            return ResponseEntity.ok(employee.get());
+//	        } else {
+//	            throw new ResourceNotFoundException("Employee not found with id: " + id);
+//	        }
+//	    }
+

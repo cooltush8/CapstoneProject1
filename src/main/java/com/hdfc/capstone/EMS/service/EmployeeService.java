@@ -5,6 +5,7 @@ package com.hdfc.capstone.EMS.service;
 
 
 import java.nio.charset.StandardCharsets;
+
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hdfc.capstone.EMS.entity.Employee;
+import com.hdfc.capstone.EMS.exception.EmployeeIDException;
 import com.hdfc.capstone.EMS.repository.EmployeeRepository;
 import com.hdfc.capstone.EMS.vo.EmployeeVO;
 
@@ -49,8 +51,9 @@ public class EmployeeService implements IEmployeeService {
 			return employeeVO;
 		}
 		else {
-			throw new Exception("Invalid EmployeeID");
+			throw new EmployeeIDException("Invalid EmployeeID : " +employeeId);
 		}
+		
 	}
 	
 	public static String encrypt(String strToEncrypt) throws Exception {
